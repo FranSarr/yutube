@@ -21,7 +21,9 @@ model User {
   updatedAt     DateTime  @updatedAt
   accounts      Account[]
   sessions      Session[]
-
+  Video         Video[]
+  subscribers  User[] @relation("Subscribers", references: [id])
+  subscribedTo User[] @relation("Subscribers", references: [id])
 }
 
 model VerificationToken {
@@ -60,4 +62,15 @@ model Session {
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
-
+model Video {
+  id         String @id @default(cuid())
+  title      String
+  url        String
+  author    User   @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  authorId  String
+  thumbnail  String
+  views      Int    @default(0)
+  length     Int    @default(0)
+  visibility String
+  createdAt  DateTime @default(now())
+}
