@@ -8,7 +8,6 @@ import Video from 'components/Video'
 
 
 
-
 export default function SingleVideo({ video, videos }) {
   if (!video) return <p className='text-center p-5'>Video does not exist 😞</p>
 
